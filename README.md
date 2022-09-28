@@ -1,8 +1,8 @@
-# My Schedule API
+# Cosmos ERP
 
 ## Project status: In Development
 
-The api for centrilize my schedule from other callendars like google.
+The api of a virtual store erp, integrated with the main sales platforms.
 
 # API Development Process
 

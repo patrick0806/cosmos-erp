@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import * as path from 'path';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -16,7 +17,9 @@ import * as path from 'path';
       entities: [path.join(__dirname, '**', '*.entity.{ts,js}')],
       migrations: ['./database/migrations/*.{ts,js}'],
       synchronize: false,
+      logging: false,
     }),
+    UserModule,
   ],
 })
 export class AppModule {}
