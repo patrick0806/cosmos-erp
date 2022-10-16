@@ -90,4 +90,4 @@ I still don't know how long this project will take to finish but I want to add s
 - CI/CD
 - Logs and monitorin
 
-## Swagger route is http://localhost:3005/api-docs
+## Swagger route is http://localhost:3005/api/v1/docs
