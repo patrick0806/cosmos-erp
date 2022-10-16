@@ -18,6 +18,6 @@
       "@shared/*": ["shared/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src","test","./ormconfig.ts"],
   "exclude": ["node_modules", "dist", ".docker"]
 }
