@@ -15,20 +15,27 @@ export class LoginService {
   ) {}
 
   private async validateUser(email, password) {
-    const user = await this.userRepository.findOne({ where: { email } });
-    if (!user && user.password !== password) {
+    try {
+      const user = await this.userRepository.findOne({ where: { email } });
+      if (!user && user.password !== password) {
+        throw new HttpException(
+          'User email or password is invalid',
+          HttpStatus.UNAUTHORIZED,
+        );
+      }
+
+      delete user.password;
+      return user;
+    } catch (error) {
       throw new HttpException(
         'User email or password is invalid',
         HttpStatus.UNAUTHORIZED,
       );
     }
-
-    delete user.password;
-    return user;
   }
 
   async execute(email: string, password: string): Promise<LoginResponseDTO> {
-    const user = this.validateUser(email, password);
+    const user = await this.validateUser(email, password);
     return {
       accessToken: this.jwtService.sign({ ...user }),
     };

@@ -1,7 +1,10 @@
-import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Req } from '@nestjs/common';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+import { LOG_NAMES } from '@shared/constants';
 import { API_TAGS } from '@shared/constants/apiTags';
+import { ILog } from '@shared/interfaces';
+import { IRequest } from '@shared/interfaces/log.interface';
 
 import { LoginDTO } from './dtos/login.request.dto';
 import { LoginResponseDTO } from './dtos/login.response.dto';
@@ -26,7 +29,13 @@ export class LoginController {
   })
   async createUser(
     @Body() { email, password }: LoginDTO,
-  ): Promise<LoginResponseDTO> {
-    return this.loginService.execute(email, password);
+    @Req() req: IRequest,
+  ): Promise<ILog.LogsParams> {
+    req.operation = 'login';
+    const data = await this.loginService.execute(email, password);
+    return {
+      data,
+      message: LOG_NAMES.BUILD_MESSAGE(' validação do usuário'),
+    };
   }
 }

@@ -1,8 +1,11 @@
-import { Controller, Param, Get, HttpStatus } from '@nestjs/common';
+import { Controller, Param, Get, HttpStatus, Req } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
+import { LOG_NAMES } from '@shared/constants';
 import { API_TAGS } from '@shared/constants/apiTags';
 import { UserDTO } from '@shared/dtos';
+import { ILog } from '@shared/interfaces';
+import { IRequest } from '@shared/interfaces/log.interface';
 
 import { GetUserByEmailService } from './getUserByEmail.service';
 
@@ -22,7 +25,15 @@ export class GetUserByEmailController {
     description: "can't find user in database",
     //TODO add type in this response
   })
-  async createUser(@Param('email') email: string): Promise<UserDTO> {
-    return this.getUserByEmailService.execute(email);
+  async createUser(
+    @Param('email') email: string,
+    @Req() req: IRequest,
+  ): Promise<ILog.LogsParams> {
+    req.operation = 'findUserByEmail';
+    const data = this.getUserByEmailService.execute(email);
+    return {
+      data,
+      message: LOG_NAMES.FIND_MESSAGE('user'),
+    };
   }
 }

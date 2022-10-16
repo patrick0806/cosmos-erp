@@ -1,8 +1,11 @@
-import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Req } from '@nestjs/common';
 import { ApiBody, ApiTags, ApiResponse } from '@nestjs/swagger';
 
+import { LOG_NAMES } from '@shared/constants';
 import { API_TAGS } from '@shared/constants/apiTags';
 import { UserDTO } from '@shared/dtos';
+import { ILog } from '@shared/interfaces';
+import { IRequest } from '@shared/interfaces/log.interface';
 
 import { CreateUserService } from './createUser.service';
 import { CreateUserRequestDTO } from './dtos/createUser.request.dto';
@@ -28,7 +31,15 @@ export class CreateUserController {
     //TODO add type in this response
   })
   @Post()
-  async createUser(@Body() userDTO: CreateUserRequestDTO): Promise<UserDTO> {
-    return this.createUserService.execute(userDTO);
+  async createUser(
+    @Body() userDTO: CreateUserRequestDTO,
+    @Req() req: IRequest,
+  ): Promise<ILog.LogsParams> {
+    req.operation = 'createUser';
+    const data = await this.createUserService.execute(userDTO);
+    return {
+      data,
+      message: LOG_NAMES.CREATE_MESSAGE('usuário'),
+    };
   }
 }
