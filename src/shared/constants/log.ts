@@ -1,0 +1,16 @@
+export default {
+  APP_NAME: 'CVC-CORP-MINHA-AGENDA-BFF-V2',
+  LOG_BUILDER_PROVIDER: 'LOG-BUILDER-PROVIDER',
+  LIST_OPERATION: (param) => `Listagem de ${param}`,
+  LIST_MESSAGE: (param) => `Sucesso ao listar ${param}`,
+  FIND_OPERATION: (param) => `Procura de ${param}`,
+  FIND_MESSAGE: (param) => `Successo ao procurar ${param}`,
+  BUILD_MESSAGE: (param) => `Sucesso ao construir ${param}`,
+  BUILD_OPERATION: (param) => `Construção de ${param}`,
+  CREATE_OPERATION: (param) => `Registro de ${param}`,
+  CREATE_MESSAGE: (param) => `Sucesso ao registrar ${param}`,
+  UPDATE_OPERATION: (param) => `Alteração de ${param}`,
+  UPDATE_MESSAGE: (param) => `Sucesso ào alterar ${param}`,
+  REQUEST_FAILED: 'Falha na requisição',
+  UNHANDLED_EXCEPTION: 'Erro não tratado',
+};
