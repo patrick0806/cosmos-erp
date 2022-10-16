@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcryptjs';
+import { randomUUID } from 'crypto';
 import { Repository } from 'typeorm';
 
 import { UserDTO } from '@shared/dtos';
@@ -27,8 +28,12 @@ export class CreateUserService {
     }
 
     user.password = await bcrypt.hash(user.password, 10);
+
     try {
-      const newUser = await this.userRepository.save(user);
+      const newUser = await this.userRepository.save({
+        ...user,
+        id: randomUUID(),
+      });
       delete newUser.password;
       return newUser;
     } catch (err) {

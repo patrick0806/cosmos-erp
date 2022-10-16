@@ -84,7 +84,7 @@ I created this project to see what it would be like to start a product project f
 
 I still don't know how long this project will take to finish but I want to add some things to it as a study, to give a proper focus on them which are:
 
-- Documentation
+- Documentation (Swagger)
 - TDD
 - Tests (unitary/integration)
 - CI/CD

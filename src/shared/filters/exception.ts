@@ -47,12 +47,7 @@ export class CaptureExceptionsFilter implements ExceptionFilter {
 
     response.status(status).json({
       statusCode: status,
-      message:
-        exception?.response?.message ||
-        Number(exception.status) === 401 ||
-        (exception.response?.status === 401 && exception.response.data === '')
-          ? 'unauthorized'
-          : 'internal server error',
+      message: exception?.response?.message || exception?.response,
     });
   }
 }
