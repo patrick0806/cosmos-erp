@@ -1,5 +1,6 @@
 import { Controller, Param, Get } from '@nestjs/common';
 import { UserDTO } from 'src/shared/dtos';
+
 import { GetUserByEmailService } from './getUserByEmail.service';
 
 @Controller('users')

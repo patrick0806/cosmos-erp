@@ -1,9 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { UserDTO } from '../../../../shared/dtos';
-import { User } from '../../../../shared/entities/user.entity';
-import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
+import { User } from '../../../../shared/entities/user.entity';
 import { LoginResponseDTO } from './dtos/login.response.dto';
 
 @Injectable()
