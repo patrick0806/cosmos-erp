@@ -2,7 +2,8 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from 'src/shared/entities/user.entity';
+
+import { User } from '@shared/entities/user.entity';
 
 import { LoginController } from './context/login/login.controller';
 import { LoginService } from './context/login/login.service';
