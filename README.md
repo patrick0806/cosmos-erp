@@ -27,10 +27,10 @@ yarn
 #### Create database
 
 ```bash
-  docker run --name my-schedule-postgres \
+  docker run --name cosmos-postgres \
     -p 5432:5432 \
-    -e POSTGRES_DB=my-schedule \
-    -e POSTGRES_USER=my-schedule \
+    -e POSTGRES_DB=cosmos \
+    -e POSTGRES_USER=cosmos \
     -e POSTGRES_PASSWORD=123 \
     -d postgres:14.4-alpine
 ```
@@ -38,18 +38,31 @@ yarn
 #### Stop Database
 
 ```bash
-docker stop my-schedule-postgres
+docker stop cosmos-postgres
 ```
 
 #### Remove database
 
 ```bash
-docker rm my-schedule-postgres
+docker rm cosmos-postgres
 ```
 
 ## Running the app
 
 First, you need create a `.env` file at the project root:
+
+```bash
+######################
+######ENV VARS########
+######################
+DATABASE_HOST=localhost
+DATABASE_NAME=cosmos
+DATABASE_USERNAME=cosmos
+DATABASE_PASSWORD=123
+DATABASE_PORT=5432
+
+JWT_SECRET=batata
+```
 
 Then, you can run as follows:
 
