@@ -6,7 +6,7 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { LOG_NAMES } from '@shared/constants';
 import { API_TAGS } from '@shared/constants/apiTags';
@@ -18,6 +18,7 @@ import { IRequest } from '@shared/interfaces/log.interface';
 import { GetUserByEmailService } from './getUserByEmail.service';
 
 @UseGuards(JwtAuthGuard)
+@ApiBearerAuth('access-token')
 @ApiTags(API_TAGS.USERS)
 @Controller('users')
 export class GetUserByEmailController {

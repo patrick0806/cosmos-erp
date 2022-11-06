@@ -6,7 +6,7 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBody, ApiTags, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiTags, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 
 import { LOG_NAMES } from '@shared/constants';
 import { API_TAGS } from '@shared/constants/apiTags';
@@ -19,6 +19,7 @@ import { CreateUserService } from './createUser.service';
 import { CreateUserRequestDTO } from './dtos/createUser.request.dto';
 
 @UseGuards(JwtAuthGuard)
+@ApiBearerAuth('access-token')
 @ApiTags(API_TAGS.USERS)
 @Controller('users')
 export class CreateUserController {
