@@ -7,7 +7,6 @@ import { Repository } from 'typeorm';
 import { UserDTO } from '@shared/dtos';
 import { User } from '@shared/entities/user.entity';
 
-import { GetUserByEmailService } from '../getUserByEmail/getUserByEmail.service';
 import { CreateUserRequestDTO } from './dtos/createUser.request.dto';
 
 @Injectable()
@@ -15,13 +14,12 @@ export class CreateUserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-    private getUserByEmailService: GetUserByEmailService,
   ) {}
 
   async execute(user: CreateUserRequestDTO): Promise<UserDTO> {
-    const isRegisteredUser = await this.getUserByEmailService.execute(
-      user.email,
-    );
+    const isRegisteredUser = await this.userRepository.findOne({
+      where: { email: user.email },
+    });
 
     if (isRegisteredUser) {
       throw new HttpException('User already registered', HttpStatus.CONFLICT);
