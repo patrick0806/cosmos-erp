@@ -1,5 +1,5 @@
 export default {
-  APP_NAME: 'CVC-CORP-MINHA-AGENDA-BFF-V2',
+  APP_NAME: 'COSMOS-API',
   LOG_BUILDER_PROVIDER: 'LOG-BUILDER-PROVIDER',
   LIST_OPERATION: (param) => `Listagem de ${param}`,
   LIST_MESSAGE: (param) => `Sucesso ao listar ${param}`,
