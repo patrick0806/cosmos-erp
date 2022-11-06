@@ -14,6 +14,7 @@ async function bootstrap() {
     .setTitle('Cosmos API')
     .setDescription('The Cosmo ERP API')
     .setVersion('1.0')
+    .addServer('/api/v1')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/v1/docs', app, document);

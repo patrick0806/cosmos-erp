@@ -16,7 +16,7 @@ export class CreateUserController {
   constructor(private createUserService: CreateUserService) {}
   @ApiBody({ type: CreateUserRequestDTO })
   @ApiResponse({
-    status: HttpStatus.OK,
+    status: HttpStatus.CREATED,
     description: 'Created User',
     type: UserDTO,
   })
