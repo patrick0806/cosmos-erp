@@ -91,3 +91,9 @@ I still don't know how long this project will take to finish but I want to add s
 - Logs and monitorin
 
 ## Swagger route is http://localhost:3005/api/v1/docs
+
+# Project Database Initial Structure
+![image](https://user-images.githubusercontent.com/47863242/201493234-ac984b20-de95-4947-ba14-f4468b708251.png)
+
+This Project Database Structure can be viewed with more details here: https://dbdiagram.io/d/636fef60c9abfc6111722b47
+
