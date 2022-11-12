@@ -22,9 +22,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node -r tsconfig-paths/register -r dotenv/config ./node_modules/typeorm/cli.js",
-    "db:migration:create": "npm run typeorm -- migration:create -d ormconfig.ts",
-    "db:migration:run": "npm run typeorm -- migration:run -d ormconfig.ts",
-    "db:migration:revert": "npm run typeorm -- migration:revert -d ormconfig.ts"
+    "db:migration:create": "yarn typeorm -- migration:create -d ormconfig.ts",
+    "db:migration:run": "yarn typeorm -- migration:run -d ormconfig.ts",
+    "db:migration:revert": "yarn typeorm -- migration:revert -d ormconfig.ts"
   },
   "dependencies": {
     "@nestjs/axios": "^0.1.0",
