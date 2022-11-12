@@ -5,18 +5,21 @@ on:
   pull_request:
 
 jobs:
-  test-ci:
+  test:
+    name: Test on node ${{ matrix.node_version }} and ${{ matrix.os }}
     runs-on: ubuntu-22.04
-
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
-    
+        node_version: ['14.x', '10', '12']
+
     steps:
-      uses: actions/checkout@v2
-      name: Use Node.JS ${{matrix.node-version}}
-      uses: actions/setup-node@v2
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node_version }}
+      uses: actions/setup-node@v1
       with:
-        node-version: ${{matrix.node-version}}
-      run: yarn ci
-      run: yarn test
+        node-version: ${{ matrix.node_version }}
+
+    - name: Install dependences and run test
+      run: |
+        yarn
+        yarn test
