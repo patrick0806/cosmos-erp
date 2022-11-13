@@ -85,8 +85,4 @@ describe('Get Countries Service', () => {
   afterAll(() => {
     jest.clearAllMocks();
   });
-
-  afterAll(() => {
-    jest.clearAllMocks();
-  });
 });
