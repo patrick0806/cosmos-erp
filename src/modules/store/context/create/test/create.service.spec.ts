@@ -63,4 +63,30 @@ describe('Get Countries Service', () => {
   afterAll(() => {
     jest.clearAllMocks();
   });
+
+  it('should fail if has a store with same name', async () => {
+    jest.spyOn(repository, 'findOne').mockResolvedValue(mockResponse);
+    try {
+      await service.execute(paramsMock.storeDTO);
+      fail();
+    } catch (err) {
+      expect(repository.findOne).toBeCalledTimes(1);
+      expect(repository.findOne).toBeCalledWith({
+        where: { name: paramsMock.storeDTO.name },
+      });
+      expect(err.response).toEqual({
+        statusCode: 409,
+        message: 'Already exist a store with this name',
+        error: 'Conflict',
+      });
+    }
+  });
+
+  afterAll(() => {
+    jest.clearAllMocks();
+  });
+
+  afterAll(() => {
+    jest.clearAllMocks();
+  });
 });
