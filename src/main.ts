@@ -1,31 +1,30 @@
-import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-
-import { CaptureExceptionsFilter } from '@shared/filters/exception';
-import { BuildResponse } from '@shared/interceptors/BuildResponse';
-import { DurationRequest } from '@shared/interceptors/DurationRequest';
-
 import { AppModule } from './app.module';
+import { SwaggerConfig } from './config/SwaggerConfig';
+import { API_BASE_PATH } from '@shared/constants/apiBasePath';
+import { ValidationPipe } from '@nestjs/common';
+import { ValidationException } from '@shared/exceptions/ValidationException';
+import { ExceptionsFilter } from '@shared/filters/ExceptionFilter';
+import { GlobalExceptionsFilter } from '@shared/filters/GlobalExceptionFIlter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const config = new DocumentBuilder()
-    .setTitle('Cosmos API')
-    .setDescription('The Cosmo ERP API')
-    .setVersion('1.0')
-    .addServer('/api/v1')
-    .addBearerAuth(
-      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
-      'access-token',
-    )
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api/v1/docs', app, document);
-  app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
-  app.useGlobalFilters(new CaptureExceptionsFilter());
-  app.useGlobalInterceptors(new DurationRequest(), new BuildResponse());
-  app.setGlobalPrefix('api/v1');
-  await app.listen(process.env.PORT || 3005);
+  const swaggerConfig = new SwaggerConfig();
+
+  swaggerConfig.setupSwagger(`${API_BASE_PATH}/docs`, app);
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      exceptionFactory: (validationErros) => {
+        throw new ValidationException(validationErros);
+      },
+    }),
+  );
+  app.useGlobalFilters(new ExceptionsFilter(), new GlobalExceptionsFilter());
+  app.setGlobalPrefix(API_BASE_PATH);
+  app.enableCors();
+  await app.listen(process.env.PORT || 3000);
 }
 bootstrap();

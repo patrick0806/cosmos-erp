@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import * as path from 'path';
-
-import { StoreModule } from '@modules/store/store.module';
+import path from 'path';
+import { RouterModule } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -16,11 +15,12 @@ import { StoreModule } from '@modules/store/store.module';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       entities: [path.join(__dirname, '**', '*.entity.{ts,js}')],
-      migrations: ['./database/migrations/*.{ts,js}'],
+      migrations: ['./config/database/migrations/*.{ts,js}'],
       synchronize: false,
-      logging: false,
+      logging: true,
     }),
-    StoreModule,
+    RouterModule.register([]),
   ],
+  controllers: [],
 })
 export class AppModule {}

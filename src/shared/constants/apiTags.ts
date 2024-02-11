@@ -1,6 +1,7 @@
 export const API_TAGS = {
-  HEALTH_CHECK: 'Health',
-  USERS: 'Users',
-  AUTH: 'Authorization',
+  AUTH: 'Auth',
   STORE: 'Store',
+  PRODUCT: 'Product',
+  CUSTOMER: 'Customer',
+  ORDERS: 'Orders',
 };
